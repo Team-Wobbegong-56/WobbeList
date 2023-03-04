@@ -23,7 +23,7 @@ reviewController.createReview = async (req, res) => {
   } catch (error) {
     // Make a custom error object to be passed into our error handler
     const errObj = {
-      message: 'ERROR: Express encountered an unidentified middleware error in reviewController.js',
+      message: 'ERROR: Express encountered an unidentified middleware error in reviewController.createReview',
       statusCode: 500,
       log: { error: error.message },
     };
@@ -34,13 +34,22 @@ reviewController.createReview = async (req, res) => {
 };
 
 reviewController.deleteReview = async (req, res) => {
-  //destructure the id of the review we are trying to delete
-  const { reviewId } = req.params;
+  try{
+    //destructure the id of the review we are trying to delete
+    const { reviewId } = req.params;
 
-  //Find the review doc by ID and remove from DB
-  const deletedReview = await ReviewModel.findByIdAndRemove(reviewId);
+    //Find the review doc by ID and remove from DB
+    const deletedReview = await ReviewModel.findByIdAndRemove(reviewId);
   
-  if()
+   if(deletedReview === undefined) {
+      return res.status(404).json({ERROR: 'Review not found'});
+    }
+
+    return res.json({message: 'Review deleted from the database!'})
+  } catch(error) {
+    
+  }
+
 };
 
 reviewController.updateReview = async (req, res) => {
