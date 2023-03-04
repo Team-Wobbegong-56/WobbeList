@@ -8,7 +8,7 @@ const sessionController = require('../controllers/sessionController');
 const UsersRouter = express.Router();
 
 // create a new user
-UsersRouter.post('/', userController.createUser, sessionController);
+UsersRouter.post('/', userController.createUser, sessionController.startSession);
 
 // retrieve an existing user by username and password
 UsersRouter.post('/login', userController.getUser);
