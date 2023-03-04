@@ -7,7 +7,7 @@ const NavBar = () => {
   // if (!user) return <Navigate to='/login' />;
   return (
     <div id='nav-bar'>
-      <ul>
+      <ul id='nav-links'>
         <li>
           <Link to='/user/home'>Home</Link>
         </li>

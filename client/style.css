@@ -1,12 +1,12 @@
 body {
   height: 100vh;
   margin: 0;
+  font: Georgia;
   
 }
 
 
-
-#nav-bar ul {
+#nav-links {
   display: flex;
   justify-content: space-between;
   align-content: center;
@@ -14,17 +14,16 @@ body {
   margin-top: 0px;
   padding: 15px 10px;
   background-color: #add8e6
-
 }
 
 #my-profile {
   margin-left: 80%;
 }
-#nav-bar li {
+#nav-links li {
   display: inline;
 }
 
-#nav-bar a {
+#nav-links a {
   color: white;
   font-family: Georgia;
   text-decoration: none;
@@ -37,6 +36,10 @@ body {
   height: 90vh;
 }
 
+#home-page {
+  margin-bottom: 40px;
+}
+
 #home-page input {
   height: 30px;
   width: 400px;
@@ -45,5 +48,28 @@ body {
   border: 1px solid black
 }
 
+#home-page p {
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+#feed {
+
+}
 
 
+.review-post {
+  border: 1px solid black;
+  width: 40%;
+
+}
+
+.review-post ul {
+ list-style-type: none; 
+ font-size: 18px;
+}
+
+.review-post span{
+  font-weight: bold;
+}
