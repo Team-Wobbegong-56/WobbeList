@@ -1,5 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, redirect } from 'react-router-dom';
+import UserContext from '../UserContext.jsx';
+import axios from 'axios';
+import { setCookie } from 'react-cookie';
 
 function Login (props) {
   let title;
@@ -25,18 +28,43 @@ function Login (props) {
     }
   }
   setValues();
+
+  const { user, setUser } = useContext(UserContext);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     return redirect('/user/home')
+  //   }
+  // }, [user])
+
+  const handleClick = () => {
+    console.log('handleClick...')
+    setUsername('');
+    setPassword('');
+
+    axios.post(reqPath, {username, password})
+      .then((data) => {
+        setCookie('userId', data.userId);
+        setUser(data.userId);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
   
   return (
     <div id='login'>
       <h1>{title}</h1>
-      <form className='login-form' action={reqPath} method='post'>
+      <form className='login-form' onSubmit={handleClick}>
         <div className='form-input'>
           <label htmlFor='username'>Username: </label>
-          <input type='username' name='username' id='username'></input>
+          <input type='username' name='username' id='username' required value={username} onChange={(e) => {setUsername(e.target.value)}}></input>
         </div>
         <div className='form-input'>
           <label htmlFor='password'>Password: </label>
-          <input type='text' name='password' id='password'></input>
+          <input type='text' name='password' id='password' required value={password} onChange={(e) => {setPassword(e.target.value)}}></input>
         </div>
         <input type="submit" value={buttonText}></input>
       </form>
