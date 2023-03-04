@@ -10,25 +10,25 @@ const HomePage = () => {
     setLocation(e.target.value);
   };
 
-  const submitLocation = async (e) => {
-    e.preventDefault();
-    navigate('/user/:location');
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') navigate('/user/:location');
   };
 
   return (
     <div id='home-page-container'>
       <div id='home-page'>
-        <p>Where are you going? </p>
+        <p>Where to? </p>
         <input
           type='text'
           name='location'
           id='location-search'
           onChange={handleChange}
           value={location}
+          onKeyDown={handleKeyDown}
         />
-        <button id='submit' onClick={submitLocation} disabled={!location}>
+        {/* <button id='submit' onClick={submitLocation} disabled={!location}>
           Submit
-        </button>
+        </button> */}
       </div>
     </div>
   );
