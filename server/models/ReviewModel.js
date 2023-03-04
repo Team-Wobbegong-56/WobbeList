@@ -29,7 +29,7 @@ const ReviewsSchema = new Schema({
   },
   comments: {
     type: String,
-    required: false
+    required: true
   }
 });
 
