@@ -8,18 +8,29 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const axios = require('axios');
+import UsersRouter from './routers/apiRouter.js'
 
 const app = express();
 
 // PORT
 const PORT = 3000;
 
+
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
+// create axios instance for frontend calls
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:3000/api'
+})
 
 // static elements
 app.use('/client', express.static(path.join(__dirname, '/dist')));
 
+// api calls
+app.use('/user', UsersRouter);
 
 // global error handler
 app.use((err, req, res, next) => {
