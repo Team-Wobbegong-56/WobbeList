@@ -40,8 +40,9 @@ userController.createUser = async (req, res, next) => {
 
 userController.getUser = async (req, res, next) => {
   try {
-    // destructure username and password from request parameters
-    const { username, password } = req.params;
+    // destructure username and password from request body
+    // frontend is giving a post request.
+    const { username, password } = req.body;
 
     // query the database for a user with username
     const user = await UserModel.findOne({ username });
