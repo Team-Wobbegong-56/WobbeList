@@ -12,4 +12,4 @@ UsersRouter.post('/', userController.createUser);
 // retrieve an existing user by username and password
 UsersRouter.post('/login', userController.getUser);
 
-export default UsersRouter;
+module.exports = UsersRouter;

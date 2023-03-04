@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const axios = require('axios');
-import UsersRouter from './routers/apiRouter.js'
+const UsersRouter = require('./routers/apiRouter.js');
 
 const app = express();
 
