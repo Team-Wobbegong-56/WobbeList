@@ -10,9 +10,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const db = require('./models/db.js');
-const reviewRouter = require('./routers/reviewRouter');
-import UsersRouter from './routers/apiRouter.js'
-
+const reviewRouter = require('./routers/reviewRouter.js');
+const UsersRouter = require('./routers/apiRouter.js');
 const app = express();
 
 // PORT
