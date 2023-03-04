@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
-  "license": "ISC",
-
+  "license": "ISC", 
   "scripts": {
     "dev": "webpack-dev-server --mode development --open & nodemon server/server.js",
     "build": "webpack --mode production",
@@ -15,16 +14,14 @@
     "url": "https://github.com/Team-Wobbegong-56/WobbeList"
   },
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^7.0.0",
     "morgan": "^1.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.8.2",
+    "react-router-dom": "^6.8.2",
     "webpack": "^5.75.0"
   },
   "devDependencies": {
