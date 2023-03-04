@@ -173,7 +173,7 @@ reviewController.getReviewsByCity = async (req, res, next) => {
     const { city } = req.params;
 
     // Find all reviews with the given city
-    const reviews = await ReviewModel.find({ city });
+    const reviews = await ReviewModel.find({ city: new RegExp(city, "i") });
 
     // Return the reviews as a JSON response
     res.json(reviews);
@@ -195,10 +195,13 @@ reviewController.getReviewsByCity = async (req, res, next) => {
 reviewController.getReviewsByCityAndType = async (req, res, next) => {
   try {
     // Get the city and review type from the request parameters
-    const { city, reviewType } = req.params;
+    const city = req.params.city;
+    const reviewType = req.params.reviewType;
 
     // Find all reviews with the given city and review type
-    const reviews = await ReviewModel.find({ city, review_type: reviewType });
+    const regexCity = new RegExp(city, "i");
+    const regexReviewType = new RegExp(reviewType, "i");
+    const reviews = await ReviewModel.find({ city: regexCity, review_type: regexReviewType });
 
     // Return the reviews as a JSON response
     res.json(reviews);
