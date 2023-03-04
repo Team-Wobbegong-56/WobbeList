@@ -1,8 +1,8 @@
 /**
  * This file handles API calls for userModels
  */
-import express from 'express';
-import userController from '../controllers/userController';
+const express =  require('express');
+const userController = require('../controllers/userController');
 
 const UsersRouter = express.Router();
 
