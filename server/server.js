@@ -9,6 +9,8 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const axios = require('axios');
+const db = require('./models/db.js');
+const reviewRouter = require('./routers/reviewRouter');
 import UsersRouter from './routers/apiRouter.js'
 
 const app = express();
@@ -31,6 +33,7 @@ app.use('/client', express.static(path.join(__dirname, '/dist')));
 
 // api calls
 app.use('/user', UsersRouter);
+app.use('/review', reviewRouter);
 
 // global error handler
 app.use((err, req, res, next) => {
@@ -45,6 +48,8 @@ app.use((err, req, res, next) => {
 });
 
 // Port
-app.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}`);
+db.once('open', () => {
+  app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
 });
+
+
