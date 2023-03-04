@@ -6,7 +6,8 @@ import Login from './Login.jsx';
 const App = () => {
   return (
     <Routes>
-      <Route path='/' element={<Login />} />
+      <Route path='/' element={<Login action='login'/>} />
+      <Route path='/signup' element={<Login action='signup'/>} />
       <Route path='/home' element={<HomePage />} />
     </Routes>
   );
