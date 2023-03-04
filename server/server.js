@@ -30,7 +30,7 @@ const axiosInstance = axios.create({
 app.use('/client', express.static(path.join(__dirname, '/dist')));
 
 // api calls
-app.use('/users', UsersRouter);
+app.use('/user', UsersRouter);
 
 // global error handler
 app.use((err, req, res, next) => {
