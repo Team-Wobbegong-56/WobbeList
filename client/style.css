@@ -1,0 +1,75 @@
+body {
+  height: 100vh;
+  margin: 0;
+  
+}
+
+
+
+#nav-bar ul {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  list-style-type: none;
+  margin-top: 0px;
+  padding: 15px 10px;
+  background-color: #add8e6
+
+}
+
+#my-profile {
+  margin-left: 80%;
+}
+#nav-bar li {
+  display: inline;
+}
+
+#nav-bar a {
+  color: white;
+  font-family: Georgia;
+  text-decoration: none;
+}
+
+#home-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+#home-page input {
+  height: 30px;
+  width: 400px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid black
+}
+
+
+
+#login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: palegoldenrod;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  align-items: center;
+  gap: 20px;
+}
