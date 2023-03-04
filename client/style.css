@@ -8,12 +8,13 @@ body {
 
 #nav-links {
   display: flex;
-  justify-content: space-between;
-  align-content: center;
+  justify-content: space-around;
+  align-items: center;
   list-style-type: none;
   margin-top: 0px;
+  margin-bottom: 0px;
   padding: 15px 10px;
-  background-color: #add8e6
+  background-color: #dfedf2
 }
 
 #my-profile {
@@ -24,9 +25,18 @@ body {
 }
 
 #nav-links a {
-  color: white;
+  color: black;
   font-family: Georgia;
   text-decoration: none;
+}
+
+#nav-links button {
+  color: white;
+  border: #add8e6;
+  border-radius: 5px;
+  background-color: #4ab2d5;
+  font-size: 15px;
+  height: 30px;
 }
 
 #home-page-container {
@@ -54,26 +64,117 @@ body {
   margin-bottom: 20px;
 }
 
-#feed {
 
+.feed-container button {
+  background-color: lightblue;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+  margin-left: 20px; 
+  border-radius: 10px;
+  width: 100px;
+}
+.feed-container .active {
+  background-color: #4ab2d5;
 }
 
 
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+
+
+#posts-container {
+  margin-top: 20px;
+  width: 40%;
+}
+
 .review-post {
   border: 1px solid black;
-  width: 40%;
+  border-radius: 10px;
+  /* width: 100%; */
 
+}
+
+.username-post {
+  margin-bottom: 10px;
+  font-size: 25px;
+  /* border-bottom: 1px solid black; */
 }
 
 .review-post ul {
  list-style-type: none; 
  font-size: 18px;
+ /* padding-right: 30px; */
 }
 
 .review-post span{
   font-weight: bold;
 
 }
+
+.review-post .edit-button{
+  background-color: white;
+  color: black;
+  border: none;
+  font-weight: bold;
+  float: right;
+  padding: 5px 6px;
+  border-radius: 50%;
+  margin: 5px 10px;
+  font-size: 20px;
+
+}
+.review-post .edit-button:hover {
+  background-color: lightgray;
+}
+
+#sidebar {
+  background: lightgray;
+  width: 300px;
+  position: fixed;
+  margin-top: 50px;
+  height: auto;
+  
+}
+#sidebar h2 {
+  text-align: center;
+}
+
+#edit-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+#edit-profile label {
+  margin-top: 10px;
+}
+
+#edit-buttons {
+  margin-top: 10px;
+}
+
+#edit-buttons button{
+  margin-left: 50px;
+}
+
+#edit-profile textarea {
+  height: 100px;
+  width: 300px;
+  font-family: Georgia;
+  font-size: 15px;
+}
+
 
 #login {
   display: flex;

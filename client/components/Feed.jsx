@@ -3,52 +3,67 @@ import { useParams } from 'react-router-dom';
 import Review from './Review.jsx';
 // import axios from 'axios';
 
-const Feed = ({ fetchLocationFeed, handleClick, feedList, location }) => {
-  // const handleClick = (e) => {
-  //   console.log(e.target.value);
-
-  // };
-
+const Feed = ({
+  fetchFeed,
+  handleClick,
+  feedList,
+  location,
+  activeButton,
+  windowLocation,
+}) => {
   // useEffect(() => {
-  //   axios.get(`http://localhost:3000/${location}/${state.category}`)
-  //     .then ((res) => {
-  //       setState({...state, feedList: res.data})
-  //     })
-  // fetchLocationFeed()
-  // }, [])
+  //   fetchFeed();
+  // }, []);
 
-  // const posts = feedList.map((review) => {
-  //   return [
-  //     <Review
-  //       locationName={review.name}
-  //       address={review.address}
-  //       rating={review.rating}
-  //       userName={review.user}
-  //     />,
-  //   ];
-  // });
+  const posts = feedList.map((review) => {
+    return [
+      <Review
+        id={review.id}
+        locationName={review.name}
+        address={review.address}
+        rating={review.rating}
+        description={review.comments}
+        userName={review.user}
+      />,
+    ];
+  });
 
   return (
     <div className='feed-container'>
       <h2>{location}</h2>
       <div>
-        <button value='Activities' onClick={handleClick}>
+        <button
+          value='Activities'
+          onClick={handleClick}
+          className={activeButton === 'Activities' ? 'active' : ''}
+        >
           Activities
         </button>
-        <button value='Landmarks' onClick={handleClick}>
+        <button
+          value='Landmarks'
+          onClick={handleClick}
+          className={activeButton === 'Landmarks' ? 'active' : ''}
+        >
           Landmarks
         </button>
-        <button value='Restaurants' onClick={handleClick}>
+        <button
+          value='Restaurants'
+          onClick={handleClick}
+          className={activeButton === 'Restaurants' ? 'active' : ''}
+        >
           Restaurants
         </button>
       </div>
-      <div id='feed'>
-        <Review
+      <div id='posts-container'>
+        {/* {posts} */}
+        {/* <Review
           locationName={'bruh'}
           address={'123 bruh moment'}
           rating={'3 bruhs'}
+          description={'hello world'}
           userName={'cool bruh'}
-        />
+          windowLocation={windowLocation}
+        /> */}
       </div>
     </div>
   );
