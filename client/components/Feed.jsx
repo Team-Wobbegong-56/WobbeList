@@ -11,22 +11,27 @@ const Feed = ({
   activeButton,
   windowLocation,
 }) => {
-  useEffect(() => {
-    fetchFeed();
-  }, [activeButton]);
+  // useEffect(() => {
+  //   fetchFeed();
+  // }, [activeButton]);
 
-  const posts = feedList.map((review) => {
-    return [
+  const posts = [];
+  feedList.forEach((review) => {
+    const stars = [];
+    for (let i = 0; i < review.rating; i++) {
+      stars.push(<span className='star'>&#9733;</span>);
+    }
+    posts.push(
       <Review
         windowLocation={windowLocation}
         key={review._id}
         locationName={review.name}
         address={review.address}
-        rating={review.rating}
+        rating={stars}
         description={review.comments}
         userName={review.user_id}
-      />,
-    ];
+      />
+    );
   });
 
   return (

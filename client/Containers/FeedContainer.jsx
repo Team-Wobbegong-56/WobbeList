@@ -21,7 +21,6 @@ const FeedContainer = () => {
   };
 
   const fetchLocationFeed = () => {
-    console.log(state.category);
     axios
       .get(
         `http://localhost:3000/review/city/${location}/type/${state.category}`
@@ -33,7 +32,12 @@ const FeedContainer = () => {
       .catch((err) => console.log(err));
   };
 
-  // console.log('state', state, 'feedList', state.feedList);
+  const titleSplit = location.split(' ');
+  const titleArr = [];
+  titleSplit.forEach((word) => {
+    titleArr.push(word[0].toUpperCase().concat(word.slice(1)));
+  });
+  const title = titleArr.join(' ');
   return (
     <div>
       <Feed
@@ -41,7 +45,7 @@ const FeedContainer = () => {
         handleClick={handleClick}
         activeButton={state.activeButton}
         feedList={state.feedList}
-        location={location}
+        location={title}
         windowLocation={windowLocation.pathname}
       />
     </div>

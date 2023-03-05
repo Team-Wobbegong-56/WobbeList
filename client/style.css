@@ -2,7 +2,7 @@ body {
   height: 100vh;
   margin: 0;
   font: Georgia;
-  background-color: #f7f9fa
+  background-color: #f6f5ec;
   
 }
 
@@ -15,7 +15,7 @@ body {
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 15px 10px;
-  background-color: #bcd8e2
+  background-color: #CCD5AE
 }
 
 #my-profile {
@@ -31,11 +31,15 @@ body {
   text-decoration: none;
 }
 
+#nav-links a:hover {
+  text-decoration: underline;
+}
+
 #nav-links button {
-  color: white;
+  color: black;
   border: #add8e6;
   border-radius: 5px;
-  background-color: #4ab2d5;
+  background-color: #FAEDCD;
   font-size: 15px;
   height: 30px;
 }
@@ -44,48 +48,49 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 80vh;
 }
 
-#home-page {
-  margin-bottom: 40px;
-}
 
 #home-page input {
   height: 30px;
   width: 400px;
   font-size: 20px;
-  border-radius: 10px;
+  border-radius: 20px;
   border: 1px solid black
 }
 
 #home-page p {
   text-align: center;
-  font-size: 35px;
+  font-size: 45px;
   margin-bottom: 20px;
 }
 
 
 .feed-container button {
-  background-color: lightblue;
+  background-color: #DDA15E;
   border: none;
   cursor: pointer;
   color: white;
   padding: 10px;
   margin-left: 20px; 
   border-radius: 10px;
-  width: 100px;
+  width: 120px;
+  font-size: 15px;
 }
 .feed-container .active {
-  background-color: #4ab2d5;
+  background-color: #9b6931;
 }
 
 
 .feed-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
+}
+
+.feed-container h2 {
+  font-size: 40px;
 }
 
 
@@ -99,7 +104,8 @@ body {
   border: 1px solid black;
   border-radius: 10px;
   margin-top: 20px;
-  /* width: 100%; */
+  background-color: #f8f1de;
+  box-shadow: 10px 10px 5px 0px rgba(219,216,219,1);
 
 }
 
@@ -136,26 +142,74 @@ body {
   background-color: lightgray;
 }
 
+#profile-feed {
+  margin-left: 200px;
+}
+
 #sidebar {
-  background: lightgray;
+  background: #E9EDC9;
   width: 300px;
   position: fixed;
-  margin-top: 50px;
-  height: auto;
+  /* margin-top: 50px; */
+  height: 100vh;
   
 }
+
+#sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 40px;
+}
+
+#sidebar img {
+  border-radius: 50%;
+}
+
+#sidebar ul {
+  list-style-type: none;
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+#edit-profile-button{
+  background-color: #E9EDC9;
+  border: none;
+  cursor: pointer;
+  float: right;
+}
+
+#edit-profile-button:hover {
+  background-color: #d5dbad
+}
+
+#edit-profile-button img {
+  height: 40px;
+  width: 35px;
+}
+
 #sidebar h2 {
   text-align: center;
+}
+
+.star {
+  color: rgb(0, 0, 0);
 }
 
 #edit-profile {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
-  width: 50%;
-  margin: auto;
-  margin-top: 50px;
+  border: 1px solid lightgray;
+  background-color: #ffffff;
+  box-shadow: 10px 9px 24px 0px rgba(189,189,189,1);
+  width: 25%;
+  border-radius: 15px;
+  min-width: 350px;
+  max-width: 400px;
+  position: absolute;
+  left: 40%;
+  top: 35%;
 }
 
 #edit-profile label {
@@ -163,11 +217,29 @@ body {
 }
 
 #edit-buttons {
-  margin-top: 10px;
+  margin: 20px 0;
 }
 
 #edit-buttons button{
-  margin-left: 50px;
+  margin: 0 40px;
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+#edit-submit {
+  background-color: #FAEDCD;
+  border: 1px solid #FAEDCD;
+  cursor: pointer;
+}
+
+#edit-cancel {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+
 }
 
 #edit-profile textarea {
