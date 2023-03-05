@@ -17,7 +17,7 @@ userController.createUser = async (req, res, next) => {
 
     // validate username is not in use
     if(userExists) {
-      return response.status(400).json({ message: 'This username is in use!' });
+      return res.status(400).json({ message: 'This username is in use!' });
     }
 
     // hash user's password using bcrypt
@@ -27,7 +27,9 @@ userController.createUser = async (req, res, next) => {
     // register a new user to the database with hashed password
     const registeredUser = await UserModel.create({ username, password: hashedPassword });
 
-    response.status(200).json({ message: 'Success!' });
+    res.locals.user = registeredUser;
+    return next();
+    
   } catch (error) {
     const err = {
       message: 'Error: express error in userController.createUser',
@@ -60,8 +62,8 @@ userController.getUser = async (req, res, next) => {
       return res.status(401).json({ message: 'incorrect password' });
     }
 
-    // return the user info with 200 status code
-    res.status(200).json({ username });
+    res.locals.user = user;
+    return next();
 
   } catch (error) {
     const err = {
