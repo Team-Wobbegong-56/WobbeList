@@ -13,29 +13,31 @@ const FeedContainer = () => {
   });
 
   const handleClick = (e) => {
-    console.log(e.target.value);
     setState({
       ...state,
       category: e.target.value,
       activeButton: e.target.value,
     });
-    console.log('class', e.target.className);
   };
 
   const fetchLocationFeed = () => {
+    console.log(state.category);
     axios
       .get(
         `http://localhost:3000/review/city/${location}/type/${state.category}`
       )
       .then((res) => {
+        console.log(res);
         setState({ ...state, feedList: res.data });
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
+  // console.log('state', state, 'feedList', state.feedList);
   return (
     <div>
       <Feed
-        // fetchFeed={fetchLocationFeed}
+        fetchFeed={fetchLocationFeed}
         handleClick={handleClick}
         activeButton={state.activeButton}
         feedList={state.feedList}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Review from './Review.jsx';
-// import axios from 'axios';
+import axios from 'axios';
 
 const Feed = ({
   fetchFeed,
@@ -11,19 +11,20 @@ const Feed = ({
   activeButton,
   windowLocation,
 }) => {
-  // useEffect(() => {
-  //   fetchFeed();
-  // }, []);
+  useEffect(() => {
+    fetchFeed();
+  }, [activeButton]);
 
   const posts = feedList.map((review) => {
     return [
       <Review
-        id={review.id}
+        windowLocation={windowLocation}
+        key={review._id}
         locationName={review.name}
         address={review.address}
         rating={review.rating}
         description={review.comments}
-        userName={review.user}
+        userName={review.user_id}
       />,
     ];
   });
@@ -54,17 +55,7 @@ const Feed = ({
           Restaurants
         </button>
       </div>
-      <div id='posts-container'>
-        {/* {posts} */}
-        {/* <Review
-          locationName={'bruh'}
-          address={'123 bruh moment'}
-          rating={'3 bruhs'}
-          description={'hello world'}
-          userName={'cool bruh'}
-          windowLocation={windowLocation}
-        /> */}
-      </div>
+      <div id='posts-container'>{posts}</div>
     </div>
   );
 };
