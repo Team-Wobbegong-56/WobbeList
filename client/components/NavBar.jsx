@@ -12,7 +12,7 @@ const NavBar = () => {
           <Link to='/user/home'>Home</Link>
         </li>
         <li id='my-profile'>
-          <Link to='/profile'>My Profile</Link>
+          <Link to='/user/profile/:user'>My Profile</Link>
         </li>
         <button id='new-review'>New Review</button>
       </ul>
