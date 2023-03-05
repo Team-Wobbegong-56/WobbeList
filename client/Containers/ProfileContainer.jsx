@@ -69,7 +69,7 @@ const ProfileContainer = () => {
           submit={submitForm}
         />
       ) : null}
-      <div id='profile-feed'>
+      <div id='profile-feed' className='profile-feed'>
         <Feed
           // fetchFeed={fetchLocationFeed}
           handleClick={handleClick}

@@ -21,20 +21,18 @@ const Review = ({
         </button>
       )}
       <ul className='review-info'>
-        <li className='username-post'>
-          <span>{userName}</span>
-        </li>
+        <li className='rating-post'>{rating}</li>
         <li>
-          <span>Name:</span> {locationName}
+          <h3 className='location-post'>{locationName}</h3>
         </li>
         <li>
           <span>Address:</span> {address}
         </li>
         <li>
-          <span>Rating:</span> {rating}
+          <span>Description:</span> {description}
         </li>
         <li>
-          <span>Description:</span> {description}
+          <span>Posted by</span> {userName}
         </li>
       </ul>
     </div>

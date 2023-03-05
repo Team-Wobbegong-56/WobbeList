@@ -2,7 +2,7 @@ body {
   height: 100vh;
   margin: 0;
   font: Georgia;
-  background-color: #f6f5ec;
+  background-color: #fbfbfb;
   
 }
 
@@ -15,7 +15,8 @@ body {
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 15px 10px;
-  background-color: #CCD5AE
+  /* background-color: #f9f2e1; */
+  border-bottom: 1px solid rgb(235,235,235)
 }
 
 #my-profile {
@@ -26,7 +27,7 @@ body {
 }
 
 #nav-links a {
-  color: black;
+  color: #094067;
   font-family: Georgia;
   text-decoration: none;
 }
@@ -36,12 +37,13 @@ body {
 }
 
 #nav-links button {
-  color: black;
-  border: #add8e6;
-  border-radius: 5px;
-  background-color: #FAEDCD;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  background-color: #3da9fc;
   font-size: 15px;
-  height: 30px;
+  height: 35px;
+  width: 100px;
 }
 
 #home-page-container {
@@ -49,6 +51,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 80vh;
+
 }
 
 
@@ -57,7 +60,7 @@ body {
   width: 400px;
   font-size: 20px;
   border-radius: 20px;
-  border: 1px solid black
+  border: 1px solid black;
 }
 
 #home-page p {
@@ -68,7 +71,7 @@ body {
 
 
 .feed-container button {
-  background-color: #DDA15E;
+  background-color: #3da9fc;
   border: none;
   cursor: pointer;
   color: white;
@@ -79,7 +82,8 @@ body {
   font-size: 15px;
 }
 .feed-container .active {
-  background-color: #9b6931;
+  background-color: #094067;
+  font-weight: bold;
 }
 
 
@@ -87,6 +91,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fffffe; 
+  height: 100vh;
 }
 
 .feed-container h2 {
@@ -104,15 +110,20 @@ body {
   border: 1px solid black;
   border-radius: 10px;
   margin-top: 20px;
-  background-color: #f8f1de;
-  box-shadow: 10px 10px 5px 0px rgba(219,216,219,1);
+  background-color: #F8F9FA;
+  /* box-shadow: 10px 10px 5px 0px rgba(219,216,219,1); */
 
 }
 
-.username-post {
+.rating-post {
   margin-bottom: 10px;
-  font-size: 25px;
+  font-size: 30px;
   /* border-bottom: 1px solid black; */
+}
+
+.location-post {
+  font-size: 25px;
+  margin: 10px 0;
 }
 
 .review-post ul {
@@ -142,15 +153,16 @@ body {
   background-color: lightgray;
 }
 
-#profile-feed {
+#profile-feed{
   margin-left: 200px;
+  background-color: #fffffe;
 }
 
 #sidebar {
-  background: #E9EDC9;
+  background-color: #fffffe;
   width: 300px;
   position: fixed;
-  /* margin-top: 50px; */
+  border-right: 1px solid lightgray;
   height: 100vh;
   
 }
@@ -173,14 +185,15 @@ body {
 }
 
 #edit-profile-button{
-  background-color: #E9EDC9;
+  background-color: #fffffe;
   border: none;
   cursor: pointer;
   float: right;
+  border-radius: 50%;
 }
 
 #edit-profile-button:hover {
-  background-color: #d5dbad
+  background-color: #e9ebec
 }
 
 #edit-profile-button img {
@@ -193,7 +206,7 @@ body {
 }
 
 .star {
-  color: rgb(0, 0, 0);
+  color: #ef4565;
 }
 
 #edit-profile {
@@ -250,7 +263,7 @@ body {
 }
 
 
-#login {
+#login-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -258,7 +271,20 @@ body {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: palegoldenrod;
+  background-color: #fffffe;
+
+}
+
+#login {
+  border: 1px solid lightgray;
+  /* background-color: #fffffe; */
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 300px;
+}
+
+#login h1 {
+  text-align: center;
 }
 
 .login-form {
@@ -267,12 +293,25 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  font-size: 18px;
+  /* border: 1px solid lightgray */
 }
 
 .form-input {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
+}
+
+#login-button {
+  width: 250px;
+  height: 35px;
+  font-size: 18px;
+  color: #fffffe;
+  border-radius: 10px;
+  background-color: #3da9fc;
+  border: none;
+  font-weight: bold;
 }
