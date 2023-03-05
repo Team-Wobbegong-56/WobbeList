@@ -10,8 +10,10 @@ const HomePage = () => {
     setLocation(e.target.value);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') navigate('/user/:location');
+  const handleKeyDown = async (e) => {
+    if (e.key === 'Enter') {
+      navigate(`/user/${location}`);
+    }
   };
 
   return (
@@ -26,9 +28,6 @@ const HomePage = () => {
           value={location}
           onKeyDown={handleKeyDown}
         />
-        {/* <button id='submit' onClick={submitLocation} disabled={!location}>
-          Submit
-        </button> */}
       </div>
     </div>
   );
