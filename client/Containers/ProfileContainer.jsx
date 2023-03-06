@@ -42,10 +42,13 @@ const ProfileContainer = () => {
   };
 
   const fetchUserFeed = () => {
-    axios.get(`http://localhost:3000/review/user/${user}`).then((res) => {
-      console.log(res.data);
-      setState({ ...state, feedList: res.data });
-    });
+    axios
+      .get(
+        `http://localhost:3000/review/user/${user}/type/${state.activeButton}`
+      )
+      .then((res) => {
+        setState({ ...state, feedList: res.data });
+      });
   };
 
   return (

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
+import EditReview from './EditReview.jsx';
+
 const NavBar = () => {
   // const { user } = useContext(userContext);
 
@@ -18,6 +20,8 @@ const NavBar = () => {
           <button id='new-review'>New Review</button>
         </Link>
       </ul>
+
+      <EditReview />
       <Outlet />
     </div>
   );

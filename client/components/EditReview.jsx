@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function EditReview (props) {
+function EditReview(props) {
   const action = props.action ?? '(action)';
   const reqType = props.request ?? '(reqType)';
   const reqPath = '/';
 
   //need to do controlled inputs
+  const [inputs, setInputs] = useState({
+    city: '',
+    category: 'Activities',
+    name: '',
+    rating: 5,
+    comments: '',
+    address: '',
+  });
 
   return (
     <div id='edit-review'>
       <div id='edit-review-box'>
-        <h1>{action} Review</h1>
+        <h1>New Review</h1>
         <form className='review-field' action={reqPath} method={reqType}>
           <div className='form-input'>
             <label htmlFor='city'>City: </label>
@@ -48,11 +56,11 @@ function EditReview (props) {
             <label htmlFor='address'>Address: </label>
             <input type='address' name='address' id='address'></input>
           </div>
-          <input type="submit" value={action}></input>
+          <input type='submit' value={action}></input>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
 export default EditReview;
