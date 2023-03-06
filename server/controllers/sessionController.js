@@ -9,7 +9,7 @@ sessionController.startSession = async (req, res, next) => {
 
     // check to see if user already has a session cookie
     if (userId) {
-      return next();
+      return res.status(200).json({ sessionId: userId });
     }
 
     // Retrieve the user from req.locals.user
