@@ -1,59 +1,104 @@
 import React, { useState } from 'react';
 import Feed from '../components/Feed.jsx';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import EditProfile from '../components/EditProfile.jsx';
+import edit from '../edit.svg';
+import cityPic from '../building.svg';
+import stockPic from '../profile-stock.jpg';
+import axios from 'axios';
 
 const ProfileContainer = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useParams();
   const [state, setState] = useState({
-    category: 'Activities',
     activeButton: 'Activities',
     feedList: [],
   });
+
+  const [open, setOpen] = useState(false);
 
   const handleClick = (e) => {
     console.log(e.target.value);
     setState({
       ...state,
-      category: e.target.value,
       activeButton: e.target.value,
     });
   };
-  // const fetchUserPosts = () => {
-  //   axios
-  //     .get(`http://localhost:3000/${user}`)
-  //     .then((res) => {
-  //       setState({ ...state, feedList: res.data });
-  //     });
-  // };
 
-  const editProfile = () => {
-    navigate(location.pathname + '/edit', { state: { id: user } });
+  const [inputs, setInputs] = useState({
+    name: '',
+    favoriteCity: '',
+    description: '',
+  });
+
+  const handleChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+    console.log(e.target.name, e.target.value);
+  };
+
+  const submitForm = () => {
+    setOpen(false);
+    const data = {};
+    for (let key in inputs) {
+      if (!inputs[key].length) {
+        data[key] = inputs[key];
+      }
+    }
+    axios.post(`/api/update`, {
+      ...data,
+    });
+  };
+
+  const fetchUserFeed = () => {
+    axios
+      .get(
+        `http://localhost:3000/api/review/user/${user}/type/${state.activeButton}`
+      )
+      .then((res) => {
+        setState({ ...state, feedList: res.data });
+      });
   };
 
   return (
-    <div>
+    <div id='profile-page'>
       <div id='sidebar'>
-        <button className='edit-profile' onClick={editProfile}>
-          Edit Profile
+        <button id='edit-profile-button' onClick={() => setOpen(!open)}>
+          <img src={edit} />
         </button>
-        <h2>{user}</h2>
-
+        <div id='sidebar-header'>
+          <img
+            height='200px'
+            width='200px'
+            id='profile-picture'
+            src={stockPic}
+          />
+          <h2>{user}</h2>
+        </div>
         <ul>
-          <li>Favorite City:</li>
+          <li>
+            <img height='25px' width='25px' src={cityPic} />
+          </li>
           <li>Bio: </li>
         </ul>
       </div>
-
-      <Feed
-        // fetchFeed={fetchLocationFeed}
-        handleClick={handleClick}
-        feedList={state.feedList}
-        activeButton={state.activeButton}
-        windowLocation={location.pathname}
-        // location={location}
-      />
+      {open ? (
+        <EditProfile
+          change={handleChange}
+          cancel={() => setOpen(false)}
+          submit={submitForm}
+        />
+      ) : null}
+      <div id='profile-feed' className='profile-feed'>
+        <Feed
+          fetchFeed={fetchUserFeed}
+          location={'Posts'}
+          handleClick={handleClick}
+          feedList={state.feedList}
+          activeButton={state.activeButton}
+          windowLocation={location.pathname}
+        />
+      </div>
     </div>
   );
 };

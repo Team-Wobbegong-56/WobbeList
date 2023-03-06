@@ -20,14 +20,16 @@ const HomePage = () => {
     <div id='home-page-container'>
       <div id='home-page'>
         <p>Where to? </p>
-        <input
-          type='text'
-          name='location'
-          id='location-search'
-          onChange={handleChange}
-          value={location}
-          onKeyDown={handleKeyDown}
-        />
+        <div id='search-bar'>
+          <input
+            type='text'
+            name='location'
+            id='location-search'
+            onChange={handleChange}
+            value={location}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
       </div>
     </div>
   );

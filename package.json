@@ -20,12 +20,16 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "file-loader": "^6.2.0",
+    "image-webpack-loader": "^8.1.0",
+    "loader": "^2.1.1",
     "mongoose": "^7.0.0",
     "morgan": "^1.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.8.2",
     "react-router-dom": "^6.8.2",
+    "sass": "^1.58.3",
     "webpack": "^5.75.0"
   },
   "devDependencies": {
