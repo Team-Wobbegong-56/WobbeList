@@ -22,17 +22,12 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-// create axios instance for frontend calls
-const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/api'
-})
-
 // static elements
 app.use('/client', express.static(path.join(__dirname, '/dist')));
 
 // api calls
-app.use('/user', UsersRouter);
-app.use('/review', reviewRouter);
+app.use('/api/user', UsersRouter);
+app.use('/api/review', reviewRouter);
 
 // global error handler
 app.use((err, req, res, next) => {
