@@ -14,19 +14,21 @@ sessionController.startSession = async (req, res, next) => {
 
     // Retrieve the user from res.locals.user
     const user = res.locals.user;
+    const userId = user._id.valueOf();
 
     // create new session with user_id as the userId
-    const session = new Session({ cookieId: user._id });
+    const session = new Session({ cookieId: userId });
     await session.save();
 
     // set a cookie with the session ID
     res.cookie('userId', session.cookieId, { maxAge: 86400000});
 
-    return res.status(200).json({ sessionId: session.cookieId });
+    // res.status(200).json({ sessionId: session.cookieId });
+    return next();
   } catch (error) {
     const err = {
       message: 'Error: express error in userController.updateUser',
-      statusCode: 500,
+      status: 500,
       log: { error: error.message }
     }
     return next(err);
