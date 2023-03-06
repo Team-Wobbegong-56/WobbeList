@@ -386,7 +386,6 @@ button {
   gap: 20px;
 }
 
-<<<<<<< HEAD
 .form-input a {
   color: #3da9fc;
   text-decoration: none;
@@ -403,7 +402,6 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
-=======
 #edit-review {
   display: flex;
   flex-direction: column;
@@ -434,4 +432,3 @@ button {
   align-items: flex-start;
   gap: 20px;
 }
->>>>>>> dev
