@@ -151,19 +151,17 @@ button {
 }
 
 .addresss {
+  display: flex;
+  align-items: center;
   font-weight: bold;
   font-size: 18px;
-  margin: 0;
+  margin-bottom: 5px;
 }
 
-.city-review {
-  margin-bottom: 10px;
-  font-weight: bold;
-}
 
 
 .description {
-  margin-bottom: 20px;
+  margin: 10px 0 20px;
 }
 
 .star-container {
@@ -222,7 +220,7 @@ button {
 
 #profile-feed{
   margin: auto;
-
+  width: 100%;
   background-color: #d8eefe;
 }
 
@@ -294,8 +292,8 @@ button {
   min-width: 350px;
   max-width: 400px;
   position: absolute;
-  left: 48%;
-  top: 35%;
+  left: 40%;
+  top: 30%;
 }
 
 #edit-profile label {

@@ -35,11 +35,11 @@ const Review = ({
           <li className='city-review'>
             <img
               className='city-icon'
-              height='23px'
-              width='23px'
+              height='20px'
+              width='20px'
               src={cityPic}
-            />{' '}
-            {city}
+            />
+            <strong>{city}</strong>
           </li>
         )}
         <li className='description'>{description}</li>
