@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Login (props) {
+function Login(props) {
   let title;
   let question;
   let answer;
@@ -23,9 +23,9 @@ function Login (props) {
       buttonText = 'Sign Up';
       path = '/';
     }
-  }
+  };
   setValues();
-  
+
   return (
     <div id='login'>
       <h1>{title}</h1>
@@ -38,14 +38,18 @@ function Login (props) {
           <label htmlFor='password'>Password: </label>
           <input type='text' name='password' id='password'></input>
         </div>
-        <input type="submit" value={buttonText}></input>
+        <input type='submit' value={buttonText}></input>
       </form>
       <div className='form-input'>
         <p>{question}</p>
-        <Link to={path}><p><strong>{answer}</strong></p></Link>
+        <Link to={path}>
+          <p>
+            <strong>{answer}</strong>
+          </p>
+        </Link>
       </div>
     </div>
-  )
+  );
 }
 
 export default Login;
