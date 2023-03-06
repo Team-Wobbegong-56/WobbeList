@@ -7,6 +7,7 @@ import ProfileContainer from '../Containers/ProfileContainer.jsx';
 import Login from './Login.jsx';
 import EditProfile from './EditProfile.jsx';
 import EditReview from './EditReview.jsx';
+import NotFound from './NotFound.jsx';
 import '../style.css';
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='profile/:user' element={<ProfileContainer />} />
           <Route path='profile/:user/edit' element={<EditProfile />} />
         </Route>
+        <Route path='*' element={<NotFound/>}></Route>
       </Routes>
     </div>
   );
