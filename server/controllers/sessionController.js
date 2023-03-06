@@ -12,8 +12,8 @@ sessionController.startSession = async (req, res, next) => {
     //   return res.status(200).json({ sessionId: userId });
     // }
 
-    // Retrieve the user from req.locals.user
-    const user = req.locals.user;
+    // Retrieve the user from res.locals.user
+    const user = res.locals.user;
 
     // create new session with user_id as the userId
     const session = new Session({ cookieId: user._id });
