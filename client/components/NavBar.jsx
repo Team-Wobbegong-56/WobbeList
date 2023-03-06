@@ -14,7 +14,9 @@ const NavBar = () => {
         <li id='my-profile'>
           <Link to='/user/profile/:user'>My Profile</Link>
         </li>
-        <button id='new-review'>New Review</button>
+        <Link to='/user/editreview'>
+          <button id='new-review'>New Review</button>
+        </Link>
       </ul>
       <Outlet />
     </div>
