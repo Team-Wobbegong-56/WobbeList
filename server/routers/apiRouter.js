@@ -17,7 +17,7 @@ UsersRouter.post('/login', userController.getUser, sessionController.startSessio
   res.status(200).json({ user: res.locals.user })
 });
 
-UsersRouter.post('/update', userController.updateUser);
+UsersRouter.patch('/update', userController.updateUser);
 
 UsersRouter.delete('/delete', userController.deleteUser);
 

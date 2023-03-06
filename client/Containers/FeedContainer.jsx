@@ -7,7 +7,6 @@ const FeedContainer = () => {
   const windowLocation = useLocation();
   const { location } = useParams();
   const [state, setState] = useState({
-    category: 'Activities',
     activeButton: 'Activities',
     feedList: [],
   });
@@ -15,33 +14,34 @@ const FeedContainer = () => {
   const handleClick = (e) => {
     setState({
       ...state,
-      category: e.target.value,
       activeButton: e.target.value,
     });
   };
 
   const fetchLocationFeed = () => {
-    console.log(state.category);
-    axios
-      .get(
-        `http://localhost:3000/review/city/${location}/type/${state.category}`
-      )
+    axios(
+      `http://localhost:3000/api/review/city/${location}/type/${state.activeButton}`
+    )
       .then((res) => {
-        console.log(res);
         setState({ ...state, feedList: res.data });
       })
       .catch((err) => console.log(err));
   };
 
-  // console.log('state', state, 'feedList', state.feedList);
+  const titleSplit = location.split(' ');
+  const titleArr = [];
+  titleSplit.forEach((word) => {
+    titleArr.push(word[0].toUpperCase().concat(word.slice(1)));
+  });
+  const title = titleArr.join(' ');
   return (
-    <div>
+    <div id='feed-page'>
       <Feed
         fetchFeed={fetchLocationFeed}
         handleClick={handleClick}
         activeButton={state.activeButton}
         feedList={state.feedList}
-        location={location}
+        location={title}
         windowLocation={windowLocation.pathname}
       />
     </div>

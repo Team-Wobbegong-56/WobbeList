@@ -20,11 +20,11 @@ userController.createUser = async (req, res, next) => {
     // validate username is not in use
     if (userExists) {
       const err = {
-        message: "Error: Username is already in use",
+        message: "Error: Username already exists",
         status: 401,
-        log: { error: "Username is already in use" },
+        log: { error: "Username already exists" },
       };
-      return next(err)
+      return next(err);
     }
 
     // hash user's password using bcrypt
@@ -35,6 +35,8 @@ userController.createUser = async (req, res, next) => {
     const registeredUser = await UserModel.create({
       username,
       password: hashedPassword,
+      favorite_city: "",
+      description: "",
     });
     console.log(registeredUser);
     res.locals.user = registeredUser;

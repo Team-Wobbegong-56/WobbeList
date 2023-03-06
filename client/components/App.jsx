@@ -23,10 +23,8 @@ const App = () => {
         <Route path='/signup' element={<Login action='signup'/>} />
         <Route path='/user' element={<NavBar />}>
           <Route path='home' element={<HomePage />} />
-          <Route path='editreview' element={<EditReview />} />
           <Route path=':location' element={<FeedContainer />} />
           <Route path='profile/:user' element={<ProfileContainer />} />
-          <Route path='profile/:user/edit' element={<EditProfile />} />
         </Route>
         <Route path='*' element={<NotFound/>}></Route>
       </Routes>
