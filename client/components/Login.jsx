@@ -33,25 +33,42 @@ function Login (props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // useEffect(() => {
-  //   if (user !== null) {
-  //     return redirect('/user/home')
-  //   }
-  // }, [user])
+  useEffect(() => {
+    if (user !== null) {
+      return redirect('/user/home')
+    }
+  }, [user])
 
-  const handleClick = () => {
+  const handleClick = (event) => {
     console.log('handleClick...')
-    setUsername('');
-    setPassword('');
+    console.log('reqPath: ', reqPath);
+    console.log('username + password: ', {username, password});
+    const obj = {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({username, password})
+    }
 
-    axios.post(reqPath, {username, password})
-      .then((data) => {
-        setCookie('userId', data.userId);
-        setUser(data.userId);
+    fetch(reqPath, body)
+      .then((data) =>{
+        console.log(data);
+        setCookie('userId', data.sessionId);
+        setUser(data.sessionId);
+        setUsername('');
+        setPassword('');
       })
-      .catch((error) => {
-        console.log(error);
-      })
+      .catch((error) => console.log(error));
+
+    // axios.post(reqPath, {username, password})
+    //   .then((data) =>{
+    //     console.log(data);
+    //     setCookie('userId', data.sessionId);
+    //     setUser(data.sessionId);
+    //     setUsername('');
+    //     setPassword('');
+    //   })
+    //   .catch((error) => console.log(error))
+    event.preventDefault();
   }
   
   return (

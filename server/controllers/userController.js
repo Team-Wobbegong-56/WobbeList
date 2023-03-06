@@ -10,6 +10,8 @@ const userController = {};
 
 userController.createUser = async (req, res, next) => {
   try {
+    console.log('in userController.createUser')
+    console.log('req.body: ', req.body);
     const { username, password } = req.body;
 
     // query the db for a username with the same username

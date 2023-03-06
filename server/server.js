@@ -20,12 +20,13 @@ const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded()); //added this
 app.use(cookieParser());
 
 // create axios instance for frontend calls
-const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/api'
-})
+// const axiosInstance = axios.create({
+//   baseURL: 'http://localhost:8080'
+// })
 
 // static elements
 app.use('/client', express.static(path.join(__dirname, '/dist')));
