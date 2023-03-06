@@ -18,7 +18,7 @@ function Login(props) {
       answer = 'Create an account.';
       buttonText = 'Log In';
       path = '/signup';
-      reqPath += '/api/login';
+      reqPath += '/login';
     } else {
       title = 'Create an account !';
       question = 'Already have an account?';
