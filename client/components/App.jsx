@@ -6,6 +6,7 @@ import FeedContainer from '../Containers/FeedContainer.jsx';
 import ProfileContainer from '../Containers/ProfileContainer.jsx';
 import Login from './Login.jsx';
 import EditProfile from './EditProfile.jsx';
+import EditReview from './EditReview.jsx';
 import '../style.css';
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/signup' element={<Login action='signup' />} />
         <Route path='/user' element={<NavBar />}>
           <Route path='home' element={<HomePage />} />
+          <Route path='editreview' element={<EditReview />} />
           <Route path=':location' element={<FeedContainer />} />
           <Route path='profile/:user' element={<ProfileContainer />} />
           <Route path='profile/:user/edit' element={<EditProfile />} />

@@ -11,6 +11,10 @@ const UsersRouter = express.Router();
 UsersRouter.post('/', userController.createUser, sessionController.startSession);
 
 // retrieve an existing user by username and password
-UsersRouter.post('/login', userController.getUser);
+UsersRouter.post('/login', userController.getUser, sessionController.startSession);
+
+UsersRouter.post('/update', userController.updateUser);
+
+UsersRouter.delete('/delete', userController.deleteUser);
 
 module.exports = UsersRouter;

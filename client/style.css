@@ -386,6 +386,7 @@ button {
   gap: 20px;
 }
 
+<<<<<<< HEAD
 .form-input a {
   color: #3da9fc;
   text-decoration: none;
@@ -402,3 +403,35 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
+=======
+#edit-review {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+#edit-review-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  gap: 20px;
+  background-color: rgb(238, 207, 170);
+  border: 1px solid gray;
+} 
+
+
+.review-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+>>>>>>> dev
