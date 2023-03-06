@@ -5,16 +5,13 @@ const sessionController = {};
 // middleware function to start a new session
 sessionController.startSession = async (req, res, next) => {
   try { 
-    console.log('in sessionController.startSession');
     // const userId = req.cookies.userId;
-    // console.log('userId: ', userId); //userId is undefined
-    // console.log('req.cookies: ', req.cookies);
 
-    // check to see if user already has a session cookie
+    // // check to see if user already has a session cookie
     // if (userId) {
-    //   return next();
+    //   return res.status(200).json({ sessionId: userId });
     // }
-    console.log('res.locals: ', res.locals);
+
     // Retrieve the user from req.locals.user
     const user = res.locals.user; //updated to res.locals
     const id = user._id.valueOf() //need valueOf?

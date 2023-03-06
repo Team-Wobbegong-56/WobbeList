@@ -4,7 +4,7 @@ import UserContext from '../UserContext.jsx';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
-function Login (props) {
+function Login(props) {
   let title;
   let question;
   let answer;
@@ -26,7 +26,7 @@ function Login (props) {
       buttonText = 'Sign Up';
       path = '/';
     }
-  }
+  };
   setValues();
 
   const { user, setUser } = useContext(UserContext);
@@ -67,14 +67,18 @@ function Login (props) {
           <label htmlFor='password'>Password: </label>
           <input type='text' name='password' id='password' required value={password} onChange={(e) => {setPassword(e.target.value)}}></input>
         </div>
-        <input type="submit" value={buttonText}></input>
+        <input type='submit' value={buttonText}></input>
       </form>
       <div className='form-input'>
         <p>{question}</p>
-        <Link to={path}><p><strong>{answer}</strong></p></Link>
+        <Link to={path}>
+          <p>
+            <strong>{answer}</strong>
+          </p>
+        </Link>
       </div>
     </div>
-  )
+  );
 }
 
 export default Login;

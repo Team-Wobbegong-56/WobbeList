@@ -30,4 +30,8 @@ reviewRouter.get('/city/:city/type/:reviewType', reviewController.getReviewsByCi
 // Get all reviews by city and user
 reviewRouter.get('/city/:city/user/:userId', reviewController.getReviewsByCityAndUser);
 
+// Get all reviews by user and review type
+reviewRouter.get('/user/:userId/type/:reviewType', reviewController.getReviewsByUserAndType);
+
+
 module.exports = reviewRouter;

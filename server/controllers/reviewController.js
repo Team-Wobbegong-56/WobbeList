@@ -1,13 +1,23 @@
 const ReviewModel = require('../models/ReviewModel.js');
+const UserModel = require('../models/UserModel.js');
 
 const reviewController = {};
 
 //CREATE A REVIEW
-reviewController.createReview = async (req, res) => {
+reviewController.createReview = async (req, res, next) => {
   try {
     const { user_id, city, review_type, name, rating, address, comments } = req.body;
+
+    // Find the user document corresponding to the given user_id
+    const user = await UserModel.findById(user_id);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
     const review = new ReviewModel({
       user_id,
+      username: user.username, // Include the user's username in the review
       city,
       review_type,
       name,
@@ -20,7 +30,7 @@ reviewController.createReview = async (req, res) => {
 
     //Send our saved review doc as a JSON obj
     res.json(savedReview);
-
+    console.log('Review saved to the database!');
   } catch (error) {
     // Make a custom error object to be passed into our error handler
     const errObj = {
@@ -233,6 +243,31 @@ reviewController.getReviewsByCityAndUser = async (req, res, next) => {
     // Make a custom error object to be passed into our error handler
     const errObj = {
       message: 'ERROR: Express encountered an unidentified middleware error in reviewController.getReviewsByCityAndUser',
+      statusCode: 500,
+      log: { error: error.message },
+    };
+
+    // Pass our errObj to be handled by our global error handler
+    next(errObj);
+  }
+};
+
+//GET REVIEW BY USER BY TYPE
+reviewController.getReviewsByUserAndType = async (req, res, next) => {
+  try {
+    // Get the user ID and review type from the request parameters
+    const { userId, reviewType } = req.params;
+
+    // Find all reviews with the given user ID and review type
+    const regexReviewType = new RegExp(reviewType, "i");
+    const reviews = await ReviewModel.find({ user_id: userId, review_type: regexReviewType });
+
+    // Return the reviews as a JSON response
+    res.json(reviews);
+  } catch (error) {
+    // Make a custom error object to be passed into our error handler
+    const errObj = {
+      message: 'ERROR: Express encountered an unidentified middleware error in reviewController.getReviewsByUserAndType',
       statusCode: 500,
       log: { error: error.message },
     };
