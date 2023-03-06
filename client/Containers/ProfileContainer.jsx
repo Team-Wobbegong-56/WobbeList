@@ -5,6 +5,7 @@ import EditProfile from '../components/EditProfile.jsx';
 import edit from '../edit.svg';
 import cityPic from '../building.svg';
 import stockPic from '../profile-stock.jpg';
+import axios from 'axios';
 
 const ProfileContainer = () => {
   const location = useLocation();
@@ -26,6 +27,7 @@ const ProfileContainer = () => {
   };
 
   const [inputs, setInputs] = useState({
+    name: '',
     password: '',
     favoriteCity: '',
     bio: '',
@@ -39,13 +41,12 @@ const ProfileContainer = () => {
     setOpen(false);
   };
 
-  // const fetchUserPosts = () => {
-  //   axios
-  //     .get(`http://localhost:3000/${user}`)
-  //     .then((res) => {
-  //       setState({ ...state, feedList: res.data });
-  //     });
-  // };
+  const fetchUserFeed = () => {
+    axios.get(`http://localhost:3000/review/user/${user}`).then((res) => {
+      console.log(res.data);
+      setState({ ...state, feedList: res.data });
+    });
+  };
 
   return (
     <div id='profile-page'>
@@ -78,7 +79,7 @@ const ProfileContainer = () => {
       ) : null}
       <div id='profile-feed' className='profile-feed'>
         <Feed
-          // fetchFeed={fetchLocationFeed}
+          fetchFeed={fetchUserFeed}
           location={'Posts'}
           handleClick={handleClick}
           feedList={state.feedList}

@@ -32,8 +32,14 @@ const Review = ({
           <img className='address-icon' src={addressPic} /> {address}
         </li>
         {windowLocation.includes('user/profile') && (
-          <li>
-            <img className='city-icon' src={cityPic} /> {city}
+          <li className='city-review'>
+            <img
+              className='city-icon'
+              height='23px'
+              width='23px'
+              src={cityPic}
+            />{' '}
+            {city}
           </li>
         )}
         <li className='description'>{description}</li>
