@@ -13,18 +13,16 @@ sessionController.startSession = async (req, res, next) => {
     // }
 
     // Retrieve the user from req.locals.user
-    const user = res.locals.user; //updated to res.locals
-    const id = user._id.valueOf() //need valueOf?
-    console.log('new Session arg: ', id)
+    const user = res.locals.user;
+    const id = user._id.valueOf();
 
     // create new session with user_id as the userId
-    const session = new Session({ cookieId: id }); //changed this and below from userId to cookieId
+    const session = new Session({ cookieId: id });
     await session.save();
-    console.log('session created') //did not get here
 
     // set a cookie with the session ID
-    res.cookie('userId', session.cookieId.valueOf(), /*{ maxAge: 86400000}*/); //removed maxAge
-    console.log({ sessionId: session.cookieId });
+    res.cookie('userId', session.cookieId, { maxAge: 86400000});
+
     return res.status(200).json({ sessionId: session.cookieId });
   } catch (error) {
     const err = {
