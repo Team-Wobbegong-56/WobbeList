@@ -3,6 +3,7 @@ import Feed from '../components/Feed.jsx';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import EditProfile from '../components/EditProfile.jsx';
 import edit from '../edit.svg';
+import cityPic from '../building.svg';
 import stockPic from '../profile-stock.jpg';
 
 const ProfileContainer = () => {
@@ -10,7 +11,6 @@ const ProfileContainer = () => {
   const navigate = useNavigate();
   const { user } = useParams();
   const [state, setState] = useState({
-    category: 'Activities',
     activeButton: 'Activities',
     feedList: [],
   });
@@ -21,12 +21,12 @@ const ProfileContainer = () => {
     console.log(e.target.value);
     setState({
       ...state,
-      category: e.target.value,
       activeButton: e.target.value,
     });
   };
 
   const [inputs, setInputs] = useState({
+    password: '',
     favoriteCity: '',
     bio: '',
   });
@@ -48,17 +48,24 @@ const ProfileContainer = () => {
   // };
 
   return (
-    <div>
+    <div id='profile-page'>
       <div id='sidebar'>
         <button id='edit-profile-button' onClick={() => setOpen(!open)}>
           <img src={edit} />
         </button>
         <div id='sidebar-header'>
+          <img
+            height='200px'
+            width='200px'
+            id='profile-picture'
+            src={stockPic}
+          />
           <h2>{user}</h2>
-          <img height='200px' width='200px' src={stockPic} />
         </div>
         <ul>
-          <li>Favorite City:</li>
+          <li>
+            <img height='25px' width='25px' src={cityPic} />
+          </li>
           <li>Bio: </li>
         </ul>
       </div>
@@ -72,6 +79,7 @@ const ProfileContainer = () => {
       <div id='profile-feed' className='profile-feed'>
         <Feed
           // fetchFeed={fetchLocationFeed}
+          location={'Posts'}
           handleClick={handleClick}
           feedList={state.feedList}
           activeButton={state.activeButton}

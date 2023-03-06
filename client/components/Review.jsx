@@ -1,10 +1,13 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import addressPic from '/client/location.svg';
+import cityPic from '/client/building.svg';
 
 const Review = ({
   locationName,
   address,
   rating,
+  city,
   description,
   userName,
   windowLocation,
@@ -21,16 +24,19 @@ const Review = ({
         </button>
       )}
       <ul className='review-info'>
-        <li className='rating-post'>{rating}</li>
-        <li>
+        <li className='review-heading'>
           <h3 className='location-post'>{locationName}</h3>
+          <span className='star-container'>{rating}</span>
         </li>
-        <li>
-          <span>Address:</span> {address}
+        <li className='addresss'>
+          <img className='address-icon' src={addressPic} /> {address}
         </li>
-        <li>
-          <span>Description:</span> {description}
-        </li>
+        {windowLocation.includes('user/profile') && (
+          <li>
+            <img className='city-icon' src={cityPic} /> {city}
+          </li>
+        )}
+        <li className='description'>{description}</li>
         <li>
           <span>Posted by</span> {userName}
         </li>

@@ -11,9 +11,9 @@ const Feed = ({
   activeButton,
   windowLocation,
 }) => {
-  // useEffect(() => {
-  //   fetchFeed();
-  // }, [activeButton]);
+  useEffect(() => {
+    fetchFeed();
+  }, [activeButton]);
 
   const posts = [];
   feedList.forEach((review) => {
@@ -21,10 +21,16 @@ const Feed = ({
     for (let i = 0; i < review.rating; i++) {
       stars.push(<span className='star'>&#9733;</span>);
     }
+    if (review.rating < 5) {
+      for (let i = 0; i < 5 - review.rating; i++) {
+        stars.push(<span className='empty-star'>&#9734;</span>);
+      }
+    }
     posts.push(
       <Review
         windowLocation={windowLocation}
         key={review._id}
+        city={review.city}
         locationName={review.name}
         address={review.address}
         rating={stars}
@@ -37,7 +43,7 @@ const Feed = ({
   return (
     <div className='feed-container'>
       <h2>{location}</h2>
-      <div>
+      <div id='button-container'>
         <button
           value='Activities'
           onClick={handleClick}
@@ -47,6 +53,7 @@ const Feed = ({
         </button>
         <button
           value='Landmarks'
+          id='landmark'
           onClick={handleClick}
           className={activeButton === 'Landmarks' ? 'active' : ''}
         >
