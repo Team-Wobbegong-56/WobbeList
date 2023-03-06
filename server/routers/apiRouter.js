@@ -8,10 +8,14 @@ const sessionController = require('../controllers/sessionController');
 const UsersRouter = express.Router();
 
 // create a new user
-UsersRouter.post('/', userController.createUser, sessionController.startSession);
+UsersRouter.post('/', userController.createUser, sessionController.startSession, (res, req) => {
+  res.statusCode(200).json({ user: res.locals.user })
+});
 
 // retrieve an existing user by username and password
-UsersRouter.post('/login', userController.getUser, sessionController.startSession);
+UsersRouter.post('/login', userController.getUser, sessionController.startSession, (res, req) => {
+  res.statusCode(200).json({ user: res.locals.user })
+});
 
 UsersRouter.post('/update', userController.updateUser);
 
