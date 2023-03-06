@@ -17,7 +17,12 @@ userController.createUser = async (req, res, next) => {
 
     // validate username is not in use
     if(userExists) {
-      return res.status(400).json({ message: 'This username is in use!' });
+      const err = {
+        message: 'Error: This username is already in use!',
+        statusCode: 400,
+        log: { error: error.message }
+      }
+      return next(err);
     }
 
     // hash user's password using bcrypt
@@ -51,7 +56,12 @@ userController.getUser = async (req, res, next) => {
 
     // if user is not found, return a 404 error
     if (!user) {
-      return res.status(404).json({ message: 'user not found'});
+      const err = {
+        message: 'Error: Error in username or password please try again',
+        statusCode: 400,
+        log: { error: error.message }
+      }
+      return next(err);
     }
 
     // compare provided password with stored hashed password
@@ -59,7 +69,12 @@ userController.getUser = async (req, res, next) => {
 
     // if password does not match, return a 401 code
     if (!isMatch) {
-      return res.status(401).json({ message: 'incorrect password' });
+      const err = {
+        message: 'Error: Error in username or password please try again',
+        statusCode: 400,
+        log: { error: error.message }
+      }
+      return next(err);
     }
 
     res.locals.user = user;
@@ -85,7 +100,12 @@ userController.deleteUser = async (req, res, next) => {
 
     // if user is not found, return a 404 error
     if (!user) {
-    return res.status(404).json({ message: 'user not found'});
+      const err = {
+        message: 'Error: Cannot find user with this username',
+        statusCode: 400,
+        log: { error: error.message }
+      }
+      return next(err);
     }
 
     // delete the user from the database
@@ -113,7 +133,12 @@ userController.updateUser = async (req, res, next) => {
 
     // if user is not found, return a 404 error
     if (!user) {
-      return res.status(404).json({ message: 'user not found' });
+      const err = {
+        message: 'Error: This user was not found',
+        statusCode: 400,
+        log: { error: error.message }
+      }
+      return next(err);
     }
 
     // destructure the new username and or password, city, info from request body
