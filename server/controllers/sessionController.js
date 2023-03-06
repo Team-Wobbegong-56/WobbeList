@@ -27,7 +27,7 @@ sessionController.startSession = async (req, res, next) => {
     return next();
   } catch (error) {
     const err = {
-      message: 'Error: express error in userController.updateUser',
+      message: 'Error: express error in startSession',
       status: 500,
       log: { error: error.message }
     }

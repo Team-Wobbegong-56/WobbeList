@@ -18,10 +18,11 @@ userController.createUser = async (req, res, next) => {
     // validate username is not in use
     if (userExists) {
       const err = {
-        message: "Error: Username is already in use",
+        message: "Error: Username already exists",
         status: 401,
-        log: { error: "Username is already in use" },
+        log: { error: "Username already exists" },
       };
+      return next(err);
     }
 
     // hash user's password using bcrypt
@@ -32,13 +33,15 @@ userController.createUser = async (req, res, next) => {
     const registeredUser = await UserModel.create({
       username,
       password: hashedPassword,
+      favorite_city: "",
+      description: "",
     });
 
     res.locals.user = registeredUser;
     return next();
   } catch (error) {
     const err = {
-      message: "Error: express error in userController.createUser",
+      message: "Error: Error in userController.createUser",
       status: 500,
       log: { error: error.message },
     };
