@@ -252,4 +252,29 @@ reviewController.getReviewsByCityAndUser = async (req, res, next) => {
   }
 };
 
+//GET REVIEW BY USER BY TYPE
+reviewController.getReviewsByUserAndType = async (req, res, next) => {
+  try {
+    // Get the user ID and review type from the request parameters
+    const { userId, reviewType } = req.params;
+
+    // Find all reviews with the given user ID and review type
+    const regexReviewType = new RegExp(reviewType, "i");
+    const reviews = await ReviewModel.find({ user_id: userId, review_type: regexReviewType });
+
+    // Return the reviews as a JSON response
+    res.json(reviews);
+  } catch (error) {
+    // Make a custom error object to be passed into our error handler
+    const errObj = {
+      message: 'ERROR: Express encountered an unidentified middleware error in reviewController.getReviewsByUserAndType',
+      statusCode: 500,
+      log: { error: error.message },
+    };
+
+    // Pass our errObj to be handled by our global error handler
+    next(errObj);
+  }
+};
+
 module.exports = reviewController;
