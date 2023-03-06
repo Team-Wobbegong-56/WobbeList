@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../UserContext.jsx';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
 
 function Login(props) {
   let title;
@@ -32,7 +32,7 @@ function Login(props) {
   const { user, setUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [cookies, setCookie] = useCookies(['userId']);
+  // const [cookies, setCookie] = useCookies(['userId']);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,13 +46,18 @@ function Login(props) {
 
     axios.post(reqPath, {username, password})
       .then((res) =>{
+        console.log(res);
         const data = res.data;
-        setCookie('userId', data.sessionId, { path: '/' });
-        setUser(data.sessionId);
-        setUsername('');
-        setPassword('');
+        console.log('res.data: ', data);
+        // setCookie('userId', data.sessionId, { path: '/' });
+        // setUser(data.sessionId);
+        // setUsername('');
+        // setPassword('');
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error);
+        alert(error.response.data);
+      });
   }
   
   return (

@@ -2,9 +2,9 @@
  * Controller for handling all user documentation into the database
  */
 
-const { response } = require('express');
-const UserModel = require('../models/UserModel');
-const bcrypt = require('bcrypt')
+const { response } = require("express");
+const UserModel = require("../models/UserModel");
+const bcrypt = require("bcrypt");
 
 const userController = {};
 
@@ -18,13 +18,13 @@ userController.createUser = async (req, res, next) => {
     const userExists = await UserModel.findOne({ username });
 
     // validate username is not in use
-    if(userExists) {
+    if (userExists) {
       const err = {
-        message: 'Error: This username is already in use!',
-        statusCode: 400,
-        log: { error: error.message }
-      }
-      return next(err);
+        message: "Error: Username is already in use",
+        status: 401,
+        log: { error: "Username is already in use" },
+      };
+      return next(err)
     }
 
     // hash user's password using bcrypt
@@ -32,98 +32,99 @@ userController.createUser = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // register a new user to the database with hashed password
-    const registeredUser = await UserModel.create({ username, password: hashedPassword });
-
+    const registeredUser = await UserModel.create({
+      username,
+      password: hashedPassword,
+    });
+    console.log(registeredUser);
     res.locals.user = registeredUser;
     return next();
-    
   } catch (error) {
     const err = {
-      message: 'Error: express error in userController.createUser',
-      statusCode: 500,
-      log: { error: error.message }
-    }
+      message: "Error: Error in userController.createUser",
+      status: 500,
+      log: { error: error.message },
+    };
     return next(err);
   }
 };
 
 userController.getUser = async (req, res, next) => {
-  try {
-    // destructure username and password from request body
-    // frontend is giving a post request.
-    const { username, password } = req.body;
+    try {
+      // destructure username and password from request body
+      // frontend is giving a post request.
+      const { username, password } = req.body;
 
-    // query the database for a user with username
-    const user = await UserModel.findOne({ username });
+      // query the database for a user with username
+      const user = await UserModel.findOne({ username });
 
-    // if user is not found, return a 404 error
-    if (!user) {
-      const err = {
-        message: 'Error: Error in username or password please try again',
-        statusCode: 400,
-        log: { error: error.message }
+      // if user is not found, return a 404 error
+      if (!user) {
+        const err = {
+          message: "Error: User not found",
+          status: 401,
+          log: { error: "User not found" },
+        };
+        return next(err);
       }
+
+      // compare provided password with stored hashed password
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      // if password does not match, return a 401 code
+      if (!isMatch) {
+        const err = {
+          message: "Error: Incorrect password",
+          status: 401,
+          log: { error: "Incorrect password" },
+        };
+        return next(err);
+      }
+
+      res.locals.user = user;
+      return next();
+    } catch (error) {
+        const err = {
+          message: "Error: Error in username or password please try again",
+          status: 500,
+          log: { error: error.message },
+        };
+        return next(err);
+      }
+  };
+
+  userController.deleteUser = async (req, res, next) => {
+    try {
+      // get userId from the saved session userId
+      const { userId } = req.session.userId;
+
+      // query the database for a user with userId
+      const user = await UserModel.findOne({ userId });
+
+      // if user is not found, return a 404 error
+      if (!user) {
+        const err = {
+          message: "Error: Cannot find user with this username",
+          status: 401,
+          log: { error: "Cannot find user with this username" },
+        };
+        return next(err);
+      }
+
+      // delete the user from the database
+      await UserModel.deleteOne({ userId });
+
+      // return a success message with a 200 status code
+      return res.status(200).json({ message: "user deleted successfully" });
+    } catch (error) {
+      const err = {
+        message: "Error: express error in userController.deleteOne",
+        status: 500,
+        log: { error: "express error in userController.deleteOne" },
+      };
       return next(err);
     }
-
-    // compare provided password with stored hashed password
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    // if password does not match, return a 401 code
-    if (!isMatch) {
-      const err = {
-        message: 'Error: Error in username or password please try again',
-        statusCode: 400,
-        log: { error: error.message }
-      }
-      return next(err);
-    }
-
-    res.locals.user = user;
-    return next();
-
-  } catch (error) {
-    const err = {
-      message: 'Error: express error in userController.getUser',
-      statusCode: 500,
-      log: { error: error.message }
-    }
-    return next(err);
-  }
-}
-
-userController.deleteUser = async (req, res, next) => {
-  try {
-    // get userId from the saved session userId
-    const { userId } = req.session.userId;
-
-    // query the database for a user with userId
-    const user = await UserModel.findOne({ userId });
-
-    // if user is not found, return a 404 error
-    if (!user) {
-      const err = {
-        message: 'Error: Cannot find user with this username',
-        statusCode: 400,
-        log: { error: error.message }
-      }
-      return next(err);
-    }
-
-    // delete the user from the database
-    await UserModel.deleteOne({ userId });
-
-    // return a success message with a 200 status code
-    res.status(200).json({ message: 'user deleted successfully' });
-  } catch (error) {
-    const err = {
-      message: 'Error: express error in userController.deleteOne',
-      statusCode: 500,
-      log: { error: error.message }
-    }
-    return next(err);
-  }
-}
+};
 
 userController.updateUser = async (req, res, next) => {
   try {
@@ -136,10 +137,10 @@ userController.updateUser = async (req, res, next) => {
     // if user is not found, return a 404 error
     if (!user) {
       const err = {
-        message: 'Error: This user was not found',
-        statusCode: 400,
-        log: { error: error.message }
-      }
+        message: "Error: This user was not found",
+        status: 400,
+        log: { error: "This user was not found" },
+      };
       return next(err);
     }
 
@@ -164,16 +165,15 @@ userController.updateUser = async (req, res, next) => {
     await user.save();
 
     // return a success message with a 200 status code
-    res.status(200).json({ message: 'user updated successfully' });
+    return res.status(200).json({ message: "user updated successfully" });
   } catch (error) {
     const err = {
-      message: 'Error: express error in userController.updateUser',
-      statusCode: 500,
-      log: { error: error.message }
-    }
+      message: "Error: express error in userController.updateUser",
+      status: 500,
+      log: { error: error.message },
+    };
     return next(err);
   }
-}
-
+};
 
 module.exports = userController;
