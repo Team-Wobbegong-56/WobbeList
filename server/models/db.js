@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-const MONGO_URI = 'mongodb+srv://Wobbegadmin:XKWZUf8etMaqlCeW@wobbecluster.cnuohqc.mongodb.net/?retryWrites=true&w=majority';
+const dbUri = process.env.DB_URI
 
-mongoose.connect(MONGO_URI, {
+mongoose.connect(dbUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
