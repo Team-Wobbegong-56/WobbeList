@@ -77,11 +77,11 @@ userController.getUser = async (req, res, next) => {
 
 userController.deleteUser = async (req, res, next) => {
   try {
-    // destructure username from request parameters
-    const { username } = req.params;
+    // get userId from the saved session userId
+    const { userId } = req.session.userId;
 
-    // query the database for a user with username
-    const user = await UserModel.findOne({ username });
+    // query the database for a user with userId
+    const user = await UserModel.findOne({ userId });
 
     // if user is not found, return a 404 error
     if (!user) {
@@ -89,7 +89,7 @@ userController.deleteUser = async (req, res, next) => {
     }
 
     // delete the user from the database
-    await UserModel.deleteOne({ username });
+    await UserModel.deleteOne({ userId });
 
     // return a success message with a 200 status code
     res.status(200).json({ message: 'user deleted successfully' });
@@ -105,28 +105,33 @@ userController.deleteUser = async (req, res, next) => {
 
 userController.updateUser = async (req, res, next) => {
   try {
-    // destructure username from request parameters
-    const { username } = req.params;
+    // get userId from the saved session userId
+    const { userId } = req.session.userId;
 
-    // find the user by username
-    const user = await UserModel.findOne({ username });
+    // find the user by userId
+    const user = await UserModel.findOne({ userId });
 
     // if user is not found, return a 404 error
     if (!user) {
       return res.status(404).json({ message: 'user not found' });
     }
 
-    // destructure the new username and password from request body
-    const { newUsername, newPassword } = req.body;
+    // destructure the new username and or password, city, info from request body
+    const { newUsername, newPassword, favorite_city, description } = req.body;
 
     // update the user's username and/or password
-    user.username = newUsername || user.username;
+    user.username = newUsername ? newUsername : user.username;
 
     if (newPassword) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(newPassword, salt);
       user.password = hashedPassword;
     }
+
+    //update favorite city and description
+    user.favorite_city = favorite_city ? favorite_city : user.favorite_city;
+
+    user.description = description ? description : user.description;
 
     // save the updated user to the database
     await user.save();
