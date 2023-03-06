@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Review from './Review.jsx';
-import axios from 'axios';
 
 const Feed = ({
   fetchFeed,
@@ -30,12 +29,15 @@ const Feed = ({
       <Review
         windowLocation={windowLocation}
         key={review._id}
+        reviewId={review._id}
         city={review.city}
         locationName={review.name}
         address={review.address}
         rating={stars}
+        ratingNum={review.rating}
+        type={review.review_type}
         description={review.comments}
-        userName={review.user_id}
+        userName={review.username}
       />
     );
   });

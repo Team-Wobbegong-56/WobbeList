@@ -21,6 +21,7 @@ button {
   padding: 15px 10px;
   background-color: #fffffe;
   border-bottom: 1px solid #CCCCCC;
+  cursor: pointer;
 }
 
 #my-profile {
@@ -37,14 +38,25 @@ button {
   font-weight: bold;
 }
 
-#nav-links button {
+#new-review {
   color: #fffffe;
   border: none;
   border-radius: 10px;
   background-color: #3da9fc;
+  border: 1px solid #3da9fc;
   font-size: 18px;
   height: 35px;
   width: 130px;
+}
+
+#logout {
+  color: #3da9fc;
+  border: none;
+  border-radius: 10px;
+  background-color: #fffffe;
+  font-size: 18px;
+  height: 35px;
+  width: 100;
 }
 
 #home-page-container {
@@ -287,31 +299,13 @@ button {
   border: 1px solid #CCCCCC;
   background-color: #fffffe;
   box-shadow: 10px 9px 24px 0px rgba(189,189,189,1);
-  width: 25%;
+  padding: 30px 20px;
   border-radius: 10px;
-  min-width: 350px;
-  max-width: 400px;
   position: absolute;
   left: 40%;
   top: 30%;
 }
 
-#edit-profile label {
-  margin-top: 10px;
-  color: #222222
-}
-
-#edit-buttons {
-  margin: 20px 0;
-}
-#edit-profile input {
-  border-radius: 5px;
-  border: 1px solid #222222
-}
-
-#edit-profile textarea {
-  border-radius: 5px;
-}
 
 #edit-buttons button{
   margin: 0 40px;
@@ -336,9 +330,12 @@ button {
 
 }
 
+#edit-profile input {
+  width: 250px;
+}
 #edit-profile textarea {
   height: 100px;
-  width: 300px;
+  width: 250px;
   font-family: sans-serif;
   font-size: 15px;
 }
@@ -380,11 +377,11 @@ button {
 
 .form-input {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
 }
+
 
 .form-input a {
   color: #3da9fc;
@@ -402,33 +399,63 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
+
 #edit-review {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: antiquewhite;
   position: absolute;
-  height: 100%;
-  width: 100%;
+  top: 30%;
+  left: 35%;
+
 }
 
 #edit-review-box {
+  color: #222222;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 30px;
-  gap: 20px;
-  background-color: rgb(238, 207, 170);
-  border: 1px solid gray;
+  padding: 20px 80px;
+  border-radius: 10px;
+  background-color: #fffffe;
+  border: 1px solid #CCCCCC
 } 
 
-
-.review-field {
+#edit-review-buttons {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#edit-review-buttons button {
+  width: 80px;
+  height: 35px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+
+
+table {
+  margin: 10px 0 20px;
+  column-width: 20px;
+}
+tr {
+  line-height: 30px;
+}
+
+td {
+  vertical-align: top;
+}
+
+table input, table textarea, table select{
+  border-radius: 5px;
+  border: 1px solid #222222;
+  font-size: 17px;
+}
+
+table textarea {
+  height: 80px;
+  font-family: sans-serif;
 }

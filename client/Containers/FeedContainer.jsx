@@ -19,12 +19,10 @@ const FeedContainer = () => {
   };
 
   const fetchLocationFeed = () => {
-    axios
-      .get(
-        `http://localhost:3000/review/city/${location}/type/${state.activeButton}`
-      )
+    axios(
+      `http://localhost:3000/api/review/city/${location}/type/${state.activeButton}`
+    )
       .then((res) => {
-        console.log(res);
         setState({ ...state, feedList: res.data });
       })
       .catch((err) => console.log(err));

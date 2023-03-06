@@ -28,23 +28,32 @@ const ProfileContainer = () => {
 
   const [inputs, setInputs] = useState({
     name: '',
-    password: '',
     favoriteCity: '',
-    bio: '',
+    description: '',
   });
 
   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
+    console.log(e.target.name, e.target.value);
   };
 
   const submitForm = () => {
     setOpen(false);
+    const data = {};
+    for (let key in inputs) {
+      if (!inputs[key].length) {
+        data[key] = inputs[key];
+      }
+    }
+    axios.post(`/api/update`, {
+      ...data,
+    });
   };
 
   const fetchUserFeed = () => {
     axios
       .get(
-        `http://localhost:3000/review/user/${user}/type/${state.activeButton}`
+        `http://localhost:3000/api/review/user/${user}/type/${state.activeButton}`
       )
       .then((res) => {
         setState({ ...state, feedList: res.data });
