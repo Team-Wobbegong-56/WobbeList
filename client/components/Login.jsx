@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, redirect } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../UserContext.jsx';
 import axios from 'axios';
-import { setCookie } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 
 function Login (props) {
   let title;
@@ -10,7 +10,7 @@ function Login (props) {
   let answer;
   let buttonText;
   let path;
-  let reqPath = '/user';
+  let reqPath = 'api/user';
   const setValues = () => {
     if (props.action === 'login') {
       title = 'Welcome to WobbeList !';
@@ -18,7 +18,7 @@ function Login (props) {
       answer = 'Create an account.';
       buttonText = 'Log In';
       path = '/signup';
-      reqPath += '/login';
+      reqPath += '/api/login';
     } else {
       title = 'Create an account !';
       question = 'Already have an account?';
@@ -32,43 +32,27 @@ function Login (props) {
   const { user, setUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [cookies, setCookie] = useCookies(['userId']);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user !== null) {
-      return redirect('/user/home')
+      navigate('/user/home')
     }
   }, [user])
 
   const handleClick = (event) => {
-    console.log('handleClick...')
-    console.log('reqPath: ', reqPath);
-    console.log('username + password: ', {username, password});
-    const obj = {
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({username, password})
-    }
+    event.preventDefault();
 
-    fetch(reqPath, body)
-      .then((data) =>{
-        console.log(data);
-        setCookie('userId', data.sessionId);
+    axios.post(reqPath, {username, password})
+      .then((res) =>{
+        const data = res.data;
+        setCookie('userId', data.sessionId, { path: '/' });
         setUser(data.sessionId);
         setUsername('');
         setPassword('');
       })
-      .catch((error) => console.log(error));
-
-    // axios.post(reqPath, {username, password})
-    //   .then((data) =>{
-    //     console.log(data);
-    //     setCookie('userId', data.sessionId);
-    //     setUser(data.sessionId);
-    //     setUsername('');
-    //     setPassword('');
-    //   })
-    //   .catch((error) => console.log(error))
-    event.preventDefault();
+      .catch((error) => console.log(error))
   }
   
   return (
