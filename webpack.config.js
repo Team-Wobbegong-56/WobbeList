@@ -8,7 +8,7 @@ module.exports = {
     publicPath: '/',
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
-    clean: true
+    clean: true,
   },
   module: {
     rules: [
@@ -18,29 +18,42 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /react-router-dom/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
-      }
-    ]
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/images/',
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'index.html')
-    })
+      template: path.resolve(__dirname, 'index.html'),
+    }),
   ],
   devServer: {
     static: {
@@ -52,12 +65,11 @@ module.exports = {
     hot: true,
     compress: true,
     proxy: {
-      '/api': {
-        target: 'http://localhost:3000/',
+      '/': {
+        target: 'http://localhost:3000',
         secure: false,
       },
     },
-    historyApiFallback: true
-  }
-
+    historyApiFallback: true,
+  },
 };
