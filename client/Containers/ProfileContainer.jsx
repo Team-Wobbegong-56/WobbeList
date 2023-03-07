@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Feed from '../components/Feed.jsx';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import EditProfile from '../components/EditProfile.jsx';
 import edit from '../edit.svg';
 import cityPic from '../building.svg';
@@ -9,7 +9,6 @@ import axios from 'axios';
 
 const ProfileContainer = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const { user } = useParams();
   const [state, setState] = useState({
     activeButton: 'Activities',
@@ -78,8 +77,10 @@ const ProfileContainer = () => {
         <ul>
           <li>
             <img height='25px' width='25px' src={cityPic} />
+            {inputs.favoriteCity}
           </li>
           <li>Bio: </li>
+          {inputs.description}
         </ul>
       </div>
       {open ? (

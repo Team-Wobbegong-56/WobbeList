@@ -17,8 +17,9 @@ const Review = ({
   userName,
   windowLocation,
 }) => {
+  console.log(windowLocation);
   const [openEdit, setOpenEdit] = useState(false);
-  const [inputs, setInputs] = useState({
+  const [inputsReview, setInputsReview] = useState({
     city,
     category: type,
     name: locationName,
@@ -31,20 +32,20 @@ const Review = ({
   };
 
   const handleChange = (e) => {
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
+    setInputsReview({ ...inputs, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     setOpenEdit(false);
     axios
       .put(`http://localhost:3000/api/review/${reviewId}`, {
         user_id: '6403c4d2c983ee99555e1365',
-        city: inputs.city,
-        review_type: inputs.category,
-        name: inputs.name,
-        rating: inputs.rating,
-        address: inputs.address,
-        comments: inputs.comments,
+        city: inputsReview.city,
+        review_type: inputsReview.category,
+        name: inputsReview.name,
+        rating: inputsReview.rating,
+        address: inputsReview.address,
+        comments: inputsReview.comments,
       })
       .then((res) => console.log(res));
   };
@@ -83,7 +84,7 @@ const Review = ({
       {openEdit ? (
         <EditReview
           title={'Edit'}
-          current={inputs}
+          current={inputsReview}
           change={handleChange}
           cancel={() => setOpenEdit(false)}
           submit={handleSubmit}

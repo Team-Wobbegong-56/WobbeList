@@ -47,6 +47,7 @@ button {
   font-size: 18px;
   height: 35px;
   width: 130px;
+  cursor: pointer;
 }
 
 #logout {
@@ -171,7 +172,6 @@ button {
 }
 
 
-
 .description {
   margin: 10px 0 20px;
 }
@@ -223,11 +223,14 @@ button {
   background-color: #CCCCCC;
 }
 
+.city-icon {
+  margin-right: 5px;
+}
+
 #profile-page{
   background-color: #d8eefe;
   display: flex;
   justify-content: flex-start;
-  position: relative;
 }
 
 #profile-feed{
@@ -240,8 +243,7 @@ button {
   background-color: #fffffe;
   width: 300px;
   height: 100%;
-  /* position: fixed; */
-  margin: 10px 0 0 10px;
+  margin: 30px 0 0 30px;
   border: 1px solid #CCCCCC;
   border-radius: 10px;
   
@@ -401,23 +403,18 @@ button {
   cursor: pointer;
 }
 
-#edit-review {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 
-}
 
 #edit-review-box {
   color: #222222;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 10px 9px 24px 0px rgba(189,189,189,1);
   padding: 20px 80px;
   border-radius: 10px;
   background-color: #fffffe;

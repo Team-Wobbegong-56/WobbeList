@@ -5,8 +5,6 @@ import NavBar from './NavBar.jsx';
 import FeedContainer from '../Containers/FeedContainer.jsx';
 import ProfileContainer from '../Containers/ProfileContainer.jsx';
 import Login from './Login.jsx';
-import EditProfile from './EditProfile.jsx';
-import EditReview from './EditReview.jsx';
 import NotFound from './NotFound.jsx';
 import '../style.css';
 
@@ -21,7 +19,7 @@ const App = () => {
           <Route path=':location' element={<FeedContainer />} />
           <Route path='profile/:user' element={<ProfileContainer />} />
         </Route>
-        <Route path='*' element={<NotFound/>}></Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
     </div>
   );
