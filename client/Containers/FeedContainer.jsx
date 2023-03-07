@@ -15,6 +15,7 @@ const FeedContainer = () => {
     setState({
       ...state,
       activeButton: e.target.value,
+      feedList: [],
     });
   };
 

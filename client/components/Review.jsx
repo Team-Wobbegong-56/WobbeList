@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import EditReview from './EditReview.jsx';
 import axios from 'axios';
 import addressPic from '/client/location.svg';
 import cityPic from '/client/building.svg';
 import edit from '../edit.svg';
+import UserContext from '../UserContext.jsx';
 
 const Review = ({
   reviewId,
@@ -17,8 +18,10 @@ const Review = ({
   userName,
   windowLocation,
 }) => {
+  const { user } = useContext(UserContext);
+  const id = user._id;
   const [openEdit, setOpenEdit] = useState(false);
-  const [inputs, setInputs] = useState({
+  const [inputsReview, setInputsReview] = useState({
     city,
     category: type,
     name: locationName,
@@ -31,28 +34,26 @@ const Review = ({
   };
 
   const handleChange = (e) => {
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
+    setInputsReview({ ...inputsReview, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     setOpenEdit(false);
-    axios
-      .put(`http://localhost:3000/api/review/${reviewId}`, {
-        user_id: '6403c4d2c983ee99555e1365',
-        city: inputs.city,
-        review_type: inputs.category,
-        name: inputs.name,
-        rating: inputs.rating,
-        address: inputs.address,
-        comments: inputs.comments,
-      })
-      .then((res) => console.log(res));
+    axios.put(`http://localhost:3000/api/review/${reviewId}`, {
+      user_id: id,
+      city: inputsReview.city,
+      review_type: inputsReview.category,
+      name: inputsReview.name,
+      rating: inputsReview.rating,
+      address: inputsReview.address,
+      comments: inputsReview.comments,
+    });
   };
 
   return (
     <div className='review-post'>
       {windowLocation.includes('user/profile') && (
-        <button className='edit-button' onClick={() => handleClick(reviewId)}>
+        <button className='edit-button' onClick={() => handleClick()}>
           <img src={edit} width='30px' height='30px' />
         </button>
       )}
@@ -83,7 +84,7 @@ const Review = ({
       {openEdit ? (
         <EditReview
           title={'Edit'}
-          current={inputs}
+          current={inputsReview}
           change={handleChange}
           cancel={() => setOpenEdit(false)}
           submit={handleSubmit}

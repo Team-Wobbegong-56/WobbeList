@@ -46,6 +46,7 @@ button {
   font-size: 18px;
   height: 35px;
   width: 130px;
+  cursor: pointer;
 }
 
 #logout {
@@ -170,7 +171,6 @@ button {
 }
 
 
-
 .description {
   margin: 10px 0 20px;
 }
@@ -222,11 +222,14 @@ button {
   background-color: #CCCCCC;
 }
 
+.city-icon {
+  margin-right: 5px;
+}
+
 #profile-page{
   background-color: #d8eefe;
   display: flex;
   justify-content: flex-start;
-  position: relative;
 }
 
 #profile-feed{
@@ -239,8 +242,7 @@ button {
   background-color: #fffffe;
   width: 300px;
   height: 100%;
-  /* position: fixed; */
-  margin: 10px 0 0 10px;
+  margin: 30px 0 0 30px;
   border: 1px solid #CCCCCC;
   border-radius: 10px;
   
@@ -354,9 +356,10 @@ button {
 }
 
 #login {
+  
   border: 1px solid #CCCCCC;
   background-color: #fffffe;
-  padding: 20px;
+  padding: 30px 20px 20px;
   border-radius: 10px;
   min-width: 375px;
 
@@ -382,6 +385,11 @@ button {
   gap: 20px;
 }
 
+#username, #password {
+  font-size: 17px;
+  border-radius: 5px;
+  border: 1px solid #222222;
+}
 
 .form-input a {
   color: #3da9fc;
@@ -389,7 +397,7 @@ button {
 }
 
 #login-button {
-  width: 250px;
+  width: 300px;
   height: 35px;
   font-size: 18px;
   color: #fffffe;
@@ -400,23 +408,22 @@ button {
   cursor: pointer;
 }
 
-#edit-review {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
+#login-question {
+  margin-top: 20px;
 }
+
+
 
 #edit-review-box {
   color: #222222;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 10px 9px 24px 0px rgba(189,189,189,1);
   padding: 20px 80px;
   border-radius: 10px;
   background-color: #fffffe;

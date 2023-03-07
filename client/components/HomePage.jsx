@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../UserContext.jsx';
 
 const HomePage = () => {
   const [location, setLocation] = useState('');
 
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
 
   const handleChange = (e) => {
     setLocation(e.target.value);
+    console.log(user);
   };
 
   const handleKeyDown = async (e) => {

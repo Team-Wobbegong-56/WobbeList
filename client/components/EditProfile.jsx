@@ -1,10 +1,6 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 
 const EditProfile = ({ change, cancel, submit }) => {
-  // const { state } = useLocation();
-  // const { id } = state;
-
   return (
     <div id='edit-profile'>
       <h1>Edit Profile</h1>
