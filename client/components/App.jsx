@@ -26,7 +26,7 @@ const App = () => {
           <Route path=':location' element={<FeedContainer />} />
           <Route path='profile/:user' element={<ProfileContainer />} />
         </Route>
-        <Route path='*' element={<NotFound/>}></Route>
+        <Route path='/*' element={<NotFound/>}></Route>
       </Routes>
     </UserContext.Provider>
   );

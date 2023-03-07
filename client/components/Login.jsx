@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../UserContext.jsx';
 import axios from 'axios';
-// import { useCookies } from 'react-cookie';
 
 function Login(props) {
   let title;
@@ -32,7 +31,7 @@ function Login(props) {
   const { user, setUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  // const [cookies, setCookie] = useCookies(['userId']);
+  const [passwordVis, setPasswordVis] = useState('password');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,18 +45,23 @@ function Login(props) {
 
     axios.post(reqPath, {username, password})
       .then((res) =>{
-        console.log(res);
-        const data = res.data;
-        console.log('res.data: ', data);
-        // setCookie('userId', data.sessionId, { path: '/' });
-        // setUser(data.sessionId);
-        // setUsername('');
-        // setPassword('');
+        const user = res.data.user;
+        setUser(user);
+        setUsername('');
+        setPassword('');
       })
       .catch((error) => {
         console.log(error);
         alert(error.response.data);
       });
+  }
+
+  const showPassword = () => {
+    if (passwordVis === 'password') {
+      setPasswordVis('text');
+    } else {
+      setPasswordVis('password');
+    }
   }
   
   return (
@@ -70,7 +74,11 @@ function Login(props) {
         </div>
         <div className='form-input'>
           <label htmlFor='password'>Password: </label>
-          <input type='text' name='password' id='password' required value={password} onChange={(e) => {setPassword(e.target.value)}}></input>
+          <input type={passwordVis} name='password' id='password' required value={password} onChange={(e) => {setPassword(e.target.value)}}></input>
+        </div>
+        <div className='form-input'>
+          <input type='checkbox' onClick={showPassword}></input>
+          <label>Show Password</label>
         </div>
         <input type='submit' value={buttonText}></input>
       </form>
