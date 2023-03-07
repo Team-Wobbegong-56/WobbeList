@@ -12,17 +12,17 @@ import { useCookies } from 'react-cookie';
 
 const App = () => {
   const [cookies] = useCookies();
-  const [user, setUser] = useState(cookies.userId ? cookies.userId : null);
+  const [user, setUser] = useState({});
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{ user, setUser }}>
       <Routes>
-        <Route path='/' element={<Login action='login'/>} />
-        <Route path='/signup' element={<Login action='signup'/>} />
+        <Route path='/' element={<Login action='login' />} />
+        <Route path='/signup' element={<Login action='signup' />} />
         <Route path='/user' element={<NavBar />}>
           <Route path='home' element={<HomePage />} />
           <Route path=':location' element={<FeedContainer />} />
-          <Route path='profile/:user' element={<ProfileContainer />} />
+          <Route path='profile' element={<ProfileContainer />} />
         </Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>

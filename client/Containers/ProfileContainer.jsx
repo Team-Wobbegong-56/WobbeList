@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Feed from '../components/Feed.jsx';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import EditProfile from '../components/EditProfile.jsx';
 import edit from '../edit.svg';
 import cityPic from '../building.svg';
 import stockPic from '../profile-stock.jpg';
 import axios from 'axios';
+import UserContext from '../UserContext.jsx';
 
 const ProfileContainer = () => {
   const location = useLocation();
-  const { user } = useParams();
+  const { user, setUser } = useContext(UserContext);
   const [state, setState] = useState({
     activeButton: 'Activities',
     feedList: [],
+    favoriteCity: user.favoriteCity,
+    description: user.description,
   });
+  const id = user._id;
 
   const [open, setOpen] = useState(false);
 
@@ -33,7 +37,6 @@ const ProfileContainer = () => {
 
   const handleChange = (e) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
-    console.log(e.target.name, e.target.value);
   };
 
   const submitForm = () => {
@@ -42,8 +45,10 @@ const ProfileContainer = () => {
     for (let key in inputs) {
       if (!inputs[key].length) {
         data[key] = inputs[key];
+        setUser({ ...user, [key]: [data[key]] });
       }
     }
+
     axios.post(`/api/update`, {
       ...data,
     });
@@ -52,7 +57,7 @@ const ProfileContainer = () => {
   const fetchUserFeed = () => {
     axios
       .get(
-        `http://localhost:3000/api/review/user/${user}/type/${state.activeButton}`
+        `http://localhost:3000/api/review/user/${id}/type/${state.activeButton}`
       )
       .then((res) => {
         setState({ ...state, feedList: res.data });
@@ -72,15 +77,15 @@ const ProfileContainer = () => {
             id='profile-picture'
             src={stockPic}
           />
-          <h2>{user}</h2>
+          <h2>{user.username}</h2>
         </div>
         <ul>
           <li>
             <img height='25px' width='25px' src={cityPic} />
-            {inputs.favoriteCity}
+            {state.favoriteCity}
           </li>
           <li>Bio: </li>
-          {inputs.description}
+          {state.description}
         </ul>
       </div>
       {open ? (

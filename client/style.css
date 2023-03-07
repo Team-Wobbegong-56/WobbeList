@@ -10,7 +10,6 @@ button {
   font-family: sans-serif
 }
 
-
 #nav-links {
   display: flex;
   justify-content: space-around;
@@ -357,9 +356,10 @@ button {
 }
 
 #login {
+  
   border: 1px solid #CCCCCC;
   background-color: #fffffe;
-  padding: 20px;
+  padding: 30px 20px 20px;
   border-radius: 10px;
   min-width: 375px;
 
@@ -385,6 +385,11 @@ button {
   gap: 20px;
 }
 
+#username, #password {
+  font-size: 17px;
+  border-radius: 5px;
+  border: 1px solid #222222;
+}
 
 .form-input a {
   color: #3da9fc;
@@ -392,7 +397,7 @@ button {
 }
 
 #login-button {
-  width: 250px;
+  width: 300px;
   height: 35px;
   font-size: 18px;
   color: #fffffe;
@@ -401,6 +406,10 @@ button {
   border: none;
   font-weight: bold;
   cursor: pointer;
+}
+
+#login-question {
+  margin-top: 20px;
 }
 
 
