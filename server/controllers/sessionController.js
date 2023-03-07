@@ -12,7 +12,7 @@ sessionController.startSession = async (req, res, next) => {
     //   return res.status(200).json({ sessionId: userId });
     // }
 
-    // Retrieve the user from res.locals.user
+    // Retrieve the user from req.locals.user
     const user = res.locals.user;
     const userId = user._id.valueOf();
 
@@ -27,7 +27,7 @@ sessionController.startSession = async (req, res, next) => {
     return next();
   } catch (error) {
     const err = {
-      message: 'Error: express error in startSession',
+      message: 'Error: express error in userController.startSession',
       status: 500,
       log: { error: error.message }
     }

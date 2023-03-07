@@ -10,6 +10,8 @@ const userController = {};
 
 userController.createUser = async (req, res, next) => {
   try {
+    console.log('in userController.createUser')
+    console.log('req.body: ', req.body);
     const { username, password } = req.body;
 
     // query the db for a username with the same username
@@ -36,7 +38,7 @@ userController.createUser = async (req, res, next) => {
       favorite_city: "",
       description: "",
     });
-
+    console.log(registeredUser);
     res.locals.user = registeredUser;
     return next();
   } catch (error) {
